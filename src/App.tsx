@@ -156,34 +156,33 @@ const Background = () => {
         );
       })}
 
-      {/* Floating Crypto Icons - Ultra Smooth Fade */}
-      {[...Array(5)].map((_, i) => {
+      {/* Floating Crypto Icons - Sparse & Randomized */}
+      {[...Array(3)].map((_, i) => {
         const isEth = cryptoIcons[i % cryptoIcons.length].includes('ethereum');
         return (
           <motion.div
             key={`symbol-${i}`}
             className="absolute select-none grayscale-[0.05] contrast-[1.1]"
             style={{
-              width: Math.random() * 20 + 15 + "px",
+              width: Math.random() * 15 + 15 + "px",
               height: "auto",
               left: Math.random() * 90 + 5 + "%",
-              top: "105%",
+              top: Math.random() * 100 + "%", // Start from random vertical positions
               filter: isEth ? ethBlueFilter : "none"
             }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ 
-              opacity: [0, 0, 0.3, 0.3, 0, 0], // Extremely gradual fade in and out
-              scale: [0.9, 1, 1.1, 1.1, 1, 0.9],
-              y: [0, -200, -450, -700, -950, -1200],
-              x: [0, 15, -15, 25, -25, 0],
-              rotate: [0, 20, -20, 40, -40, 0]
+              opacity: [0, 0, 0.25, 0.25, 0, 0], 
+              scale: [0.9, 1, 1.05, 1.05, 1, 0.9],
+              y: [0, -150, -300, -450, -600, -750],
+              x: [0, Math.random() * 30 - 15, Math.random() * 50 - 25, Math.random() * 30 - 15, 0],
             }}
             transition={{ 
-              duration: Math.random() * 40 + 40, // Very slow movement
+              duration: Math.random() * 50 + 40, 
               repeat: Infinity, 
-              delay: Math.random() * 30,
+              delay: Math.random() * 40,
               ease: "linear",
-              times: [0, 0.15, 0.4, 0.6, 0.85, 1] // Precisely controlled timing for fade
+              times: [0, 0.2, 0.4, 0.6, 0.8, 1]
             }}
           >
             <img 
