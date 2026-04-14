@@ -122,67 +122,79 @@ const Background = () => {
     "https://cryptologos.cc/logos/litecoin-ltc-logo.png?v=024"
   ];
   
+  // Specific filter for Ethereum to make it a vibrant blue
+  const ethBlueFilter = "hue-rotate(210deg) saturate(2.5) brightness(1.1) contrast(1.1)";
+
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,157,0.02),transparent_70%)]" />
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #00ff9d 1px, transparent 1px), linear-gradient(to bottom, #00ff9d 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
       
-      {/* Semi-static Background Icons - Adjusted Visibility & Size */}
-      {[...Array(3)].map((_, i) => (
-        <div
-          key={`static-${i}`}
-          className="absolute select-none opacity-[0.12] grayscale-[0.2] contrast-[1.1]"
-          style={{
-            width: Math.random() * 30 + 30 + "px",
-            height: "auto",
-            left: Math.random() * 80 + 10 + "%",
-            top: Math.random() * 80 + 10 + "%",
-            transform: `rotate(${Math.random() * 30 - 15}deg)`,
-          }}
-        >
-          <img 
-            src={cryptoIcons[i % cryptoIcons.length]} 
-            alt="crypto icon" 
-            referrerPolicy="no-referrer"
-            className="w-full h-auto"
-          />
-        </div>
-      ))}
+      {/* Semi-static Background Icons */}
+      {[...Array(3)].map((_, i) => {
+        const isEth = cryptoIcons[i % cryptoIcons.length].includes('ethereum');
+        return (
+          <div
+            key={`static-${i}`}
+            className="absolute select-none opacity-[0.08] grayscale-[0.1] contrast-[1.1]"
+            style={{
+              width: Math.random() * 30 + 30 + "px",
+              height: "auto",
+              left: Math.random() * 80 + 10 + "%",
+              top: Math.random() * 80 + 10 + "%",
+              transform: `rotate(${Math.random() * 30 - 15}deg)`,
+              filter: isEth ? ethBlueFilter : "none"
+            }}
+          >
+            <img 
+              src={cryptoIcons[i % cryptoIcons.length]} 
+              alt="crypto icon" 
+              referrerPolicy="no-referrer"
+              className="w-full h-auto"
+            />
+          </div>
+        );
+      })}
 
-      {/* Floating Crypto Icons - Smoother Animation & Better Visibility */}
-      {[...Array(5)].map((_, i) => (
-        <motion.div
-          key={`symbol-${i}`}
-          className="absolute select-none grayscale-[0.1] contrast-[1.1]"
-          style={{
-            width: Math.random() * 20 + 15 + "px",
-            height: "auto",
-            left: Math.random() * 90 + 5 + "%",
-            top: "105%",
-          }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ 
-            opacity: [0, 0.35, 0],
-            scale: [0.9, 1.1, 0.9],
-            y: [0, -700],
-            x: [0, Math.random() * 40 - 20],
-            rotate: [0, Math.random() * 60 - 30]
-          }}
-          transition={{ 
-            duration: Math.random() * 25 + 25, 
-            repeat: Infinity, 
-            delay: Math.random() * 20,
-            ease: [0.45, 0.05, 0.55, 0.95] // Custom smooth cubic-bezier
-          }}
-        >
-          <img 
-            src={cryptoIcons[i % cryptoIcons.length]} 
-            alt="crypto icon" 
-            referrerPolicy="no-referrer"
-            className="w-full h-auto"
-          />
-        </motion.div>
-      ))}
+      {/* Floating Crypto Icons - Ultra Smooth Fade */}
+      {[...Array(5)].map((_, i) => {
+        const isEth = cryptoIcons[i % cryptoIcons.length].includes('ethereum');
+        return (
+          <motion.div
+            key={`symbol-${i}`}
+            className="absolute select-none grayscale-[0.05] contrast-[1.1]"
+            style={{
+              width: Math.random() * 20 + 15 + "px",
+              height: "auto",
+              left: Math.random() * 90 + 5 + "%",
+              top: "105%",
+              filter: isEth ? ethBlueFilter : "none"
+            }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ 
+              opacity: [0, 0, 0.3, 0.3, 0, 0], // Extremely gradual fade in and out
+              scale: [0.9, 1, 1.1, 1.1, 1, 0.9],
+              y: [0, -200, -450, -700, -950, -1200],
+              x: [0, 15, -15, 25, -25, 0],
+              rotate: [0, 20, -20, 40, -40, 0]
+            }}
+            transition={{ 
+              duration: Math.random() * 40 + 40, // Very slow movement
+              repeat: Infinity, 
+              delay: Math.random() * 30,
+              ease: "linear",
+              times: [0, 0.15, 0.4, 0.6, 0.85, 1] // Precisely controlled timing for fade
+            }}
+          >
+            <img 
+              src={cryptoIcons[i % cryptoIcons.length]} 
+              alt="crypto icon" 
+              referrerPolicy="no-referrer"
+              className="w-full h-auto"
+            />
+          </motion.div>
+        );
+      })}
 
       {/* Subtle Falling Lines */}
       {[...Array(6)].map((_, i) => (
