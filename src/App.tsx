@@ -65,14 +65,14 @@ const ProjectLog = ({
   url?: string;
 }) => (
   <div className="content-block mb-24">
-    <div className="flex items-center justify-between mb-6">
-      <h3 className="text-2xl font-bold text-white tracking-tight">{title}</h3>
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <h3 className="text-2xl font-bold text-white tracking-tight leading-tight">{title}</h3>
       {url && (
         <a 
           href={url} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="text-neon hover:text-white transition-colors flex items-center gap-2 text-xs font-mono"
+          className="text-neon hover:text-white transition-colors flex items-center gap-2 text-xs font-mono shrink-0 self-start sm:self-auto border border-neon/20 px-3 py-1 rounded-sm sm:border-none sm:p-0"
         >
           官网 <ExternalLink size={14} />
         </a>

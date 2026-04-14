@@ -4,25 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crypto Product Manager Portfolio</title>
-    <script>
-      // Fix for "Cannot redefine property: ethereum" conflict between platform and MetaMask extension
-      (function() {
-        try {
-          if (window.ethereum) {
-            console.log('MetaMask detected, skipping platform injection to avoid conflict.');
-          } else {
-            // Pre-emptively define it as configurable to allow platform injection without crashing
-            Object.defineProperty(window, 'ethereum', {
-              value: undefined,
-              writable: true,
-              configurable: true
-            });
-          }
-        } catch (e) {
-          console.warn('MetaMask injection handled:', e.message);
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>
