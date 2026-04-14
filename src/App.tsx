@@ -113,29 +113,31 @@ const Background = () => {
     "https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=024",
     "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=024",
     "https://cryptologos.cc/logos/tether-usdt-logo.png?v=024",
+    "https://cryptologos.cc/logos/bnb-bnb-logo.png?v=024",
+    "https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=024",
+    "https://cryptologos.cc/logos/xrp-xrp-logo.png?v=024",
+    "https://cryptologos.cc/logos/cardano-ada-logo.png?v=024",
     "https://cryptologos.cc/logos/solana-sol-logo.png?v=024",
-    "https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=024"
+    "https://cryptologos.cc/logos/tron-trx-logo.png?v=024",
+    "https://cryptologos.cc/logos/litecoin-ltc-logo.png?v=024"
   ];
   
-  const neonFilter = "brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1352%) hue-rotate(105deg) brightness(103%) contrast(105%)";
-
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,157,0.02),transparent_70%)]" />
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #00ff9d 1px, transparent 1px), linear-gradient(to bottom, #00ff9d 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
       
-      {/* Semi-static Background Icons - Reduced Density */}
+      {/* Semi-static Background Icons - Adjusted Visibility & Size */}
       {[...Array(3)].map((_, i) => (
         <div
           key={`static-${i}`}
-          className="absolute select-none opacity-[0.02]"
+          className="absolute select-none opacity-[0.12] grayscale-[0.2] contrast-[1.1]"
           style={{
-            width: Math.random() * 60 + 50 + "px",
+            width: Math.random() * 30 + 30 + "px",
             height: "auto",
             left: Math.random() * 80 + 10 + "%",
             top: Math.random() * 80 + 10 + "%",
             transform: `rotate(${Math.random() * 30 - 15}deg)`,
-            filter: neonFilter
           }}
         >
           <img 
@@ -147,31 +149,30 @@ const Background = () => {
         </div>
       ))}
 
-      {/* Floating Crypto Icons - Reduced Frequency & Density */}
+      {/* Floating Crypto Icons - Smoother Animation & Better Visibility */}
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={`symbol-${i}`}
-          className="absolute select-none"
+          className="absolute select-none grayscale-[0.1] contrast-[1.1]"
           style={{
-            width: Math.random() * 25 + 15 + "px",
+            width: Math.random() * 20 + 15 + "px",
             height: "auto",
             left: Math.random() * 90 + 5 + "%",
-            top: "110%",
-            filter: neonFilter
+            top: "105%",
           }}
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ 
-            opacity: [0, 0.2, 0],
-            scale: [0.8, 1, 0.8],
-            y: [0, -800],
-            x: [0, Math.random() * 60 - 30],
-            rotate: [0, Math.random() * 90 - 45]
+            opacity: [0, 0.35, 0],
+            scale: [0.9, 1.1, 0.9],
+            y: [0, -700],
+            x: [0, Math.random() * 40 - 20],
+            rotate: [0, Math.random() * 60 - 30]
           }}
           transition={{ 
-            duration: Math.random() * 30 + 25, 
+            duration: Math.random() * 25 + 25, 
             repeat: Infinity, 
             delay: Math.random() * 20,
-            ease: "easeInOut" 
+            ease: [0.45, 0.05, 0.55, 0.95] // Custom smooth cubic-bezier
           }}
         >
           <img 
