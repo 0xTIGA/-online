@@ -108,33 +108,106 @@ const ProjectLog = ({
   </div>
 );
 
-const Background = () => (
-  <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,157,0.03),transparent_70%)]" />
-    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(to right, #00ff9d 1px, transparent 1px), linear-gradient(to bottom, #00ff9d 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-    {[...Array(15)].map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-px h-20 bg-gradient-to-b from-transparent via-neon/20 to-transparent"
-        initial={{ 
-          x: Math.random() * 100 + "%", 
-          y: -100,
-          opacity: 0
-        }}
-        animate={{ 
-          y: ["0%", "120%"],
-          opacity: [0, 1, 0]
-        }}
-        transition={{ 
-          duration: Math.random() * 5 + 5, 
-          repeat: Infinity, 
-          delay: Math.random() * 5,
-          ease: "linear" 
-        }}
-      />
-    ))}
-  </div>
-);
+const Background = () => {
+  const cryptoIcons = [
+    "https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=024",
+    "https://cryptologos.cc/logos/ethereum-eth-logo.png?v=024",
+    "https://cryptologos.cc/logos/tether-usdt-logo.png?v=024",
+    "https://cryptologos.cc/logos/solana-sol-logo.png?v=024",
+    "https://cryptologos.cc/logos/dogecoin-doge-logo.png?v=024"
+  ];
+  
+  const neonFilter = "brightness(0) saturate(100%) invert(67%) sepia(89%) saturate(1352%) hue-rotate(105deg) brightness(103%) contrast(105%)";
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,157,0.02),transparent_70%)]" />
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(to right, #00ff9d 1px, transparent 1px), linear-gradient(to bottom, #00ff9d 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      
+      {/* Semi-static Background Icons - Reduced Density */}
+      {[...Array(3)].map((_, i) => (
+        <div
+          key={`static-${i}`}
+          className="absolute select-none opacity-[0.02]"
+          style={{
+            width: Math.random() * 60 + 50 + "px",
+            height: "auto",
+            left: Math.random() * 80 + 10 + "%",
+            top: Math.random() * 80 + 10 + "%",
+            transform: `rotate(${Math.random() * 30 - 15}deg)`,
+            filter: neonFilter
+          }}
+        >
+          <img 
+            src={cryptoIcons[i % cryptoIcons.length]} 
+            alt="crypto icon" 
+            referrerPolicy="no-referrer"
+            className="w-full h-auto"
+          />
+        </div>
+      ))}
+
+      {/* Floating Crypto Icons - Reduced Frequency & Density */}
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+          key={`symbol-${i}`}
+          className="absolute select-none"
+          style={{
+            width: Math.random() * 25 + 15 + "px",
+            height: "auto",
+            left: Math.random() * 90 + 5 + "%",
+            top: "110%",
+            filter: neonFilter
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ 
+            opacity: [0, 0.2, 0],
+            scale: [0.8, 1, 0.8],
+            y: [0, -800],
+            x: [0, Math.random() * 60 - 30],
+            rotate: [0, Math.random() * 90 - 45]
+          }}
+          transition={{ 
+            duration: Math.random() * 30 + 25, 
+            repeat: Infinity, 
+            delay: Math.random() * 20,
+            ease: "easeInOut" 
+          }}
+        >
+          <img 
+            src={cryptoIcons[i % cryptoIcons.length]} 
+            alt="crypto icon" 
+            referrerPolicy="no-referrer"
+            className="w-full h-auto"
+          />
+        </motion.div>
+      ))}
+
+      {/* Subtle Falling Lines */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={`line-${i}`}
+          className="absolute w-px h-40 bg-gradient-to-b from-transparent via-neon/10 to-transparent"
+          initial={{ 
+            x: Math.random() * 100 + "%", 
+            y: -200,
+            opacity: 0
+          }}
+          animate={{ 
+            y: ["0vh", "120vh"],
+            opacity: [0, 1, 0]
+          }}
+          transition={{ 
+            duration: Math.random() * 10 + 10, 
+            repeat: Infinity, 
+            delay: Math.random() * 15,
+            ease: "linear" 
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default function App() {
   const [time, setTime] = useState(new Date());
@@ -184,8 +257,8 @@ export default function App() {
                 <Shield className="text-black" size={20} />
               </div>
               <div className="flex flex-col">
-                <span className="font-mono text-white font-black tracking-tighter text-lg leading-none">PEIJIA_YU.OS</span>
-                <span className="font-mono text-[8px] text-neon/60 tracking-[0.2em] mt-1 uppercase">Blockchain_Architect_v3</span>
+                <span className="font-mono text-white font-black tracking-tighter text-lg leading-none">PEIJIA_YU</span>
+                <span className="font-mono text-[8px] text-neon/60 tracking-[0.2em] mt-1 uppercase">Crypto Product Manager</span>
               </div>
             </div>
             
@@ -193,23 +266,6 @@ export default function App() {
               <div className="flex flex-col items-end">
                 <span className="text-gray-600 uppercase text-[8px] mb-0.5">System_Clock</span>
                 <span className="text-neon tabular-nums">{formatTime(time)}</span>
-              </div>
-              
-              <div className="h-8 w-[1px] bg-white/10" />
-
-              <div className="flex flex-col items-end">
-                <span className="text-gray-600 uppercase text-[8px] mb-0.5">Network_Status</span>
-                <div className="flex items-center gap-2 text-neon">
-                  <div className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse shadow-[0_0_8px_#00FF00]" />
-                  <span className="uppercase">Encrypted_Link</span>
-                </div>
-              </div>
-
-              <div className="h-8 w-[1px] bg-white/10" />
-
-              <div className="flex flex-col items-end">
-                <span className="text-gray-600 uppercase text-[8px] mb-0.5">Protocol</span>
-                <span className="text-white">SECURE_V3.0.4</span>
               </div>
             </div>
           </div>

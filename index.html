@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crypto Product Manager Portfolio</title>
+    <script>
+      // Pre-emptively define window.ethereum as configurable to avoid "Cannot redefine property" errors
+      try {
+        if (!window.ethereum) {
+          Object.defineProperty(window, 'ethereum', {
+            value: {},
+            writable: true,
+            configurable: true
+          });
+        }
+      } catch (e) {
+        console.debug('Ethereum injection handled');
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
