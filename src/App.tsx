@@ -74,7 +74,7 @@ const ProjectLog = ({
           rel="noopener noreferrer" 
           className="text-neon hover:text-white transition-colors flex items-center gap-2 text-xs font-mono"
         >
-          VISIT_SITE <ExternalLink size={14} />
+          官网 <ExternalLink size={14} />
         </a>
       )}
     </div>
@@ -219,7 +219,7 @@ export default function App() {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="font-mono text-neon mb-2 animate-pulse flex items-center gap-2"
+            className="font-mono text-neon mb-2 flex items-center gap-2"
           >
             <span className="text-[10px]">●</span> CRYPTO 高级产品经理/PRODUCT MANAGER
           </motion.div>
